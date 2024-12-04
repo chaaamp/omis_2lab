@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Текстовый редактор</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .editor-container {
+            width: 800px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .toolbar button {
+            background-color: #ccc;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .toolbar button:hover {
+            background-color: #bbb;
+        }
+        .toolbar span {
+            margin: 0 10px;
+            align-self: center;
+        }
+        .editor {
+            padding: 20px;
+            background-color: #f5f5f5;
+            height: 300px;
+            font-size: 19px;
+            font-family: Arial, sans-serif;
+            border-top: 1px solid #ccc;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .editor:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+<div class="editor-container">
+    <div class="toolbar">
+        <button id="saveButton">Сохранить</button>
+        <span>Шрифт: Arial</span>
+        <span>Размер: 19</span>
+        <button id="participantListButton">Список участников</button>
+    </div>
+    <div class="editor" contenteditable="true">
+        Текст
+    </div>
+</div>
+
+<script>
+    // Логика для сохранения документа
+    document.getElementById('saveButton').addEventListener('click', function() {
+        const editorContent = document.querySelector('.editor').innerText;  // Получаем содержимое редактора
+        const blob = new Blob([editorContent], { type: 'text/plain' }); // Создаем файл в формате текста
+        const link = document.createElement('a'); // Создаем ссылку для скачивания
+
+        link.href = URL.createObjectURL(blob); // Устанавливаем URL для созданного файла
+        link.download = 'document.txt'; // Имя файла для сохранения
+        link.click(); // Имитируем клик по ссылке, чтобы скачать файл
+    });
+
+    // Дополнительная логика для кнопки "Список участников"
+    document.getElementById('participantListButton').addEventListener('click', function() {
+        alert('Список участников пока недоступен.');
+    });
+</script>
+</body>
+</html>
